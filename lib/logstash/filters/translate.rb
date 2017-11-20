@@ -114,6 +114,10 @@ class LogStash::Filters::Translate < LogStash::Filters::Base
   # Note: this is activated only when `exact => true`.
   config :regex, :validate => :boolean, :default => false
 
+  # If you'd like to treat dictionary keys as ip cidr, set `cidr => true`.
+  # Note: this is activated only when `exact => true`.
+  config :cidr, :validate => :boolean, :default => false
+  
   # In case no translation occurs in the event (no matches), this will add a default
   # translation string, which will always populate `field`, if the match failed.
   #
