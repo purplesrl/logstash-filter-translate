@@ -204,6 +204,13 @@ class LogStash::Filters::Translate < LogStash::Filters::Base
             event.set(@destination, lock_for_read { @dictionary[key] })
             matched = true
           end
+          elsif @cidr
+            ip = NetAddr::CIDR.create(source)
+            key = @dictionary.keys.detect{ |k| NetAddr::CIDR.create(k).matches?(ip) }
+          if key
+            event[@destination] = lock_for_read { @dictionary[key] }
+            matched = true
+          end
         elsif @dictionary.include?(source)
           event.set(@destination, lock_for_read { @dictionary[source] })
           matched = true
