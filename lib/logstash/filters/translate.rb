@@ -3,6 +3,7 @@ require "logstash/filters/base"
 require "logstash/namespace"
 require "json"
 require "csv"
+require "netaddr"
 
 java_import 'java.util.concurrent.locks.ReentrantReadWriteLock'
 
